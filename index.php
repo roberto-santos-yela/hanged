@@ -5,6 +5,7 @@ echo '<br/>';
 
 $letters = range('a', 'z');
 $words = ['perro', 'bazoka', 'plebeyo', 'guarro', 'pepe'];
+$lifes = 100;
 
 $words_number = count($words);
 $random_word_index = rand( 0, $words_number -1);
@@ -33,12 +34,6 @@ echo '<br/>';
 
 $letters_number = count($letters);
 
-$lifes = 10;
-//var_dump($coded_word);
-//echo '<br/>';
-//var_dump($word_to_guess);
-
-
 $is_game_over = false;
 
 do{
@@ -66,15 +61,39 @@ do{
         
         }
 
-    }
+    }   
 
-    //var_dump($is_letter_found); exit;
+    $is_word_found = true;
+
+    foreach ($coded_word as $letter)
+    {   
+        if( $letter == "_ ")
+        {
+            
+            $is_word_found = false;
+            
+        }      
+
+    }
 
     $revealed_word = implode($coded_word);
     
     echo '<br/>';
     echo("Result: $revealed_word");
     echo '<br/>';
+
+    if($is_word_found)
+    {
+        $is_game_over = true;
+
+        echo '<br/>';
+        echo("Number of lifes: $lifes");
+        echo '<br/>';
+        echo '<br/>';
+        echo("¡YOU WIN!");
+        echo '<br/>';
+
+    } 
 
     if($is_letter_found == false)
     {
@@ -98,12 +117,6 @@ do{
         echo("GAME OVER");
         echo '<br/>';
     
-    }    
+    }
 
 }while(!$is_game_over);
-
-//echo '<br/>';
-//echo("The chosen letter is: $chosen_letter");
-//echo '<br/>';
-//var_dump($coded_word);
-
